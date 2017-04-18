@@ -39,9 +39,15 @@ public class MyService extends Service {
         /**Для варианта с перезапуском сервиса после непредусмотренной остановки,
          *  но без восстановления недообработанного интента
          */
+//        message = "MyService onStartCommand(), name = " + intent.getStringExtra("name");
+//        Log.d(LOG_TAG, message);
+//        return START_STICKY;
+        /**Для варианта с перезапуском сервиса после непредусмотренной остановки
+         *  c восстановлением недообработанного интента
+         */
         message = "MyService onStartCommand(), name = " + intent.getStringExtra("name");
         Log.d(LOG_TAG, message);
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     @Override
