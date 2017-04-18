@@ -29,12 +29,19 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        message = "MyService onStartCommand()";
-        Log.d(LOG_TAG, message);
         readeFlags(flags);
         MyRun myRun = new MyRun(startId);
         new Thread(myRun).start();
-        return START_NOT_STICKY;
+        //Для варианта без перезапуска сервиса после непредусмотренной остановки
+//        message = "MyService onStartCommand()";
+//        Log.d(LOG_TAG, message);
+//        return START_NOT_STICKY;
+        /**Для варианта с перезапуском сервиса после непредусмотренной остановки,
+         *  но без восстановления недообработанного интента
+         */
+        message = "MyService onStartCommand(), name = " + intent.getStringExtra("name");
+        Log.d(LOG_TAG, message);
+        return START_STICKY;
     }
 
     @Override
